@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "npx ts-node src/core/server.ts"
   },
   "keywords": [],
   "author": "",
@@ -11,6 +12,7 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^25.3.5",
+    "http": "^0.0.1-security",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   }

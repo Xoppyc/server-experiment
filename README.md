@@ -1,1 +1,1 @@
-# server-experiment
+this is me doing stuff for learning. I actually plan on using this server in my university practice and I want to attach databases support to it. and essentially make it separate (core from dev written code). I really wish everything will be fine and that thing will grow steadily.
