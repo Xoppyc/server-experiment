@@ -1,16 +1,18 @@
 {
   "compilerOptions": {
     "types": ["node"],
-    "target": "es6",
+    "target": "esnext",
     "module": "node16",
     "moduleResolution": "nodenext",
     "noImplicitAny": false,
     "removeComments": true,
     "preserveConstEnums": true,
     "sourceMap": true,
+    "declarationMap": true,
     "forceConsistentCasingInFileNames": true,
     "rootDir": "./src",
     "outDir": "dist",
+    "strict": true,
     "declaration": true
   },
   "include": [

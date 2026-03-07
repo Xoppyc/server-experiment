@@ -1,11 +1,17 @@
 {
-  "name": "my-backend",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "@xyc/server",
+  "version": "1.0.1",
+  "main": "dist/core/server.js",
+  "types": "dist/core/server.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "npx ts-node src/core/server.ts"
+    "dev": "tsx watch src/core/server.ts",
+    "build": "tsc",
+    "start": "node dist/core/server.js"
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",

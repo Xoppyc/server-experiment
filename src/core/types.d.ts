@@ -5,4 +5,7 @@ declare module 'http' {
     json: (data: any) => void;
     status: (code: number) => ServerResponse;
   }
+  interface IncomingMessage {
+    body?: any;
+  }
 }

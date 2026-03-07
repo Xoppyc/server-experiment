@@ -1,8 +1,11 @@
 import http, { IncomingMessage, ServerResponse } from 'http';
+import { router } from './router';
+import bodyParser from '../utils/bodyParser';
 
 const PORT: number = 3000;
+const HOST: string = 'localhost';
 
-const server = http.createServer((req: IncomingMessage, res: ServerResponse) => {
+const server = http.createServer(async (req: IncomingMessage, res: ServerResponse) => {
 
   // 设置响应头 | Set response headers
   res.setHeader('Content-Type', 'application/json');
@@ -11,25 +14,23 @@ const server = http.createServer((req: IncomingMessage, res: ServerResponse) => 
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 
-  // Basic methods (to test the waters)
-  if (req.url === '/api/hello' && req.method === 'GET') {
-    res.writeHead(200);
-    res.end(JSON.stringify({ message: 'Hello, World!' }));
+  if (req.method === 'POST' || req.method === 'PUT') {
+    try {
+      req.body = await bodyParser(req);
+    } catch (e) {
+      // If JSON is broken, don't even talk to the router
+      res.writeHead(400);
+      return res.end(JSON.stringify({ error: "Invalid JSON" }));
+    }
   }
 
-  if (req.url === '/api/data' && req.method === 'POST') {
-    let body = '';
-    req.on('data', chunk => {
-      body += chunk.toString();
-    });
-    req.on('end', () => {
-      const data = JSON.parse(body) || {};
-      res.writeHead(201);
-      res.end(JSON.stringify({ message: 'Data received', data }));
-    })
-  }
+  // this handles entire request response so it better not to break
+  if (req) {
+    router.handle(req, res);
+  };
+
 });
 
-server.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+server.listen(PORT, HOST, () => {
+  console.log(`Server is running on http://${HOST}:${PORT}`);
 });
